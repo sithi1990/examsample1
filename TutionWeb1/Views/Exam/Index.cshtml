@@ -1,0 +1,72 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+
+@model IPagedList<TutorLib.Model.Examination>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.First().ExamName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().ExamNote)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().IsPublished)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().HasCommonEnroll)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().EnrollKey)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Subject.SubjectName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Tutor.FirstName)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ExamName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ExamNote)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsPublished)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HasCommonEnroll)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EnrollKey)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Subject.SubjectName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Tutor.FirstName)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ExamID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ExamID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ExamID })
+        </td>
+    </tr>
+}
+</table>
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page }))

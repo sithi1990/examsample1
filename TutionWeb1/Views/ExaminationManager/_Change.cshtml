@@ -1,0 +1,124 @@
+﻿@using TutionWeb1.Helpers;
+
+@model TutionWeb1.Models.ViewModels.ExaminationManagerVM.ExamViewModel
+
+@Scripts.Render("~/bundles/jqueryval")
+
+@using (Html.BeginForm("Change", "ExaminationManager", FormMethod.Post, new { id = "changeForm" }))
+                {
+<div class="modal fade" id="myModal22" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-dismissable alert-success" style="display:none" id="success_st">
+                    <strong>Well done!</strong> successfully Created this exam.
+                </div>
+              
+                 
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-horizontal">
+
+                        @Html.ValidationSummary(true)
+
+                        @Html.HiddenFor(model => model.ExamID);
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.SubjectID, new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+
+                                @Html.DropDownListFor(model => model.SubjectCategoryID, ViewBag.SubjectCategoriyID as SelectList, "Select a Subject Category", new { id = "drop1", @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.SubjectCategoryID)
+                                <br/>
+                                @Html.DropDownListFor(model => model.SubjectID, ViewBag.SubjectID1 as SelectList, "Select a Subject", new { id = "SubjectID1", @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.SubjectID)
+                            </div>
+                           
+                                
+                               
+                            </div>
+
+
+                       <div class="form-group">
+                            @Html.LabelFor(model => model.ExamName, new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.TextBoxFor(model => model.ExamName, new { @class = "form-control", placeholder = "Exam Name" })
+                                @Html.ValidationMessageFor(model => model.ExamName)
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.ExamNote, new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.TextBoxFor(model => model.ExamNote, new { @class = "form-control", placeholder = "Description" })
+                                @Html.ValidationMessageFor(model => model.ExamNote)
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.EnrollKey, new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.TextBoxFor(model => model.EnrollKey, new { @class = "form-control", placeholder = "Enrollment Key" })
+                                @Html.ValidationMessageFor(model => model.EnrollKey)
+                            </div>
+                        </div>
+
+                       
+                    </div>
+                
+
+
+            </div>
+            <div class="modal-footer">
+                @Html.LoadingIcon("l_exam", "display:none")
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-default" id="CheckValid">BtnTest</button>
+                <input type="submit" class="btn btn-primary" value="Submit" />
+            </div>
+        </div>
+    </div>
+</div>
+                
+}
+
+
+<script type="text/javascript">
+    
+    $('#drop1').change(function () {
+
+        $.getJSON('/ExaminationManager/SubjectsList/' + $('#drop1').val(), function (data) {
+                var items = '<option value="">Select a Subject</option>';
+                $.each(data, function (i, subject) {
+                    items += "<option value='" + subject.Value + "'>" + subject.Text + "</option>";
+                });
+                $('#SubjectID1').html(items);
+                
+            });
+    });
+
+
+    $('#CheckValid').click(function () {
+
+        $("#l_exam").toggle();
+        if ($("#changeForm").valid()) {
+            var form = $('#changeForm');
+            $.ajax({
+                type: "POST",
+                url: form.attr('action'),
+                data: form.serialize(),
+                success: function (data) {
+                    $("#success_st").show();
+                     $("#l_exam").toggle();
+                }
+            });
+        }
+      
+    });
+
+
+</script>
+

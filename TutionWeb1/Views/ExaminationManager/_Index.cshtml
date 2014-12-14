@@ -1,0 +1,76 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@using TutionWeb1.Helpers;
+
+@model IPagedList<TutionWeb1.Models.ViewModels.ExaminationManagerVM.ExamRowViewModel>
+
+
+
+<div class="list-group">
+    @foreach (var item in Model)
+{
+
+    <div class="list-group">
+        <a href="#" class="list-group-item" style="background-color: #F5F5F5">
+            <h4 class="list-group-item-heading">
+                @Html.DisplayFor(modelItem => item.ExamID) :
+                @Html.DisplayFor(modelItem => item.ExamName)
+
+                <span style="float:right">
+                    <button class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> Delete</button>
+                    <button class="btn btn-success btn-xs" id="@item.ExamID"><span class="glyphicon glyphicon-edit"></span> Edit</button>
+                    @Html.LoadingIcon("L_" + item.ExamID.ToString(), "display:none")
+                </span>
+            </h4>
+        </a>
+        <a href="#" class="list-group-item">        
+            <p class="list-group-item-text">
+                @Html.DisplayFor(modelItem => item.ExamNote)
+            </p>
+        </a>
+       
+    </div>
+
+
+
+
+            <script type="text/javascript">
+                $('#@item.ExamID').click(function () {
+                    $("#L_@item.ExamID").toggle();
+                        $.ajax({
+                            type: "GET",
+                            url: "/ExaminationManager/CreatePartial/@item.ExamID",
+                            datatype: "html",
+                            success: function (data) {
+                                $('#ModelLoad2').empty();
+                                $('#ModelLoad2').html(data);
+                                $('#myModal22').modal();
+                                $("#L_@item.ExamID").toggle();
+                            }
+                        });
+
+                    });
+            </script>
+
+     
+          
+
+    }
+</div>
+
+@{
+    if(Request.Params["subject"]==null || Request.Params["subject"]=="")
+    {
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page}))
+    }
+    else
+    {
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page, subject = Request.Params["subject"] }))
+    }
+   
+}
+
+
+
+<div id="ModelLoad2"></div>
+

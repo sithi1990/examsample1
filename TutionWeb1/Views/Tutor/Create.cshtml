@@ -1,0 +1,140 @@
+﻿@model TutionWeb1.Models.ViewModels.TutorVM.TutorCreateViewModel
+@using MvcReCaptcha.Helpers
+@{
+    ViewBag.Title = "Create";
+}
+
+<div class="alert alert-dismissable alert-success" style="display:@ViewBag.DisplayPropVal">
+    <strong>Well done!</strong> You successfully registered as a Tutor. Please log into your E mail account and verify your registration.
+</div>
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="well bs-component">
+        <div class="form-inline">
+            <fieldset>
+                <legend>New Tutor Registration</legend>
+                @Html.ValidationSummary(true)
+
+                <div class="row">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.FirstName, new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(model => model.FirstName, new { @class = "form-control", placeholder = "First Name" })
+                            @Html.ValidationMessageFor(model => model.FirstName)
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.LastName, new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(model => model.LastName, new { @class = "form-control", placeholder = "Last Name" })
+                            @Html.ValidationMessageFor(model => model.LastName)
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Address1, new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(model => model.Address1, new { @class = "form-control", placeholder = "Address Line 1" })
+                            @Html.ValidationMessageFor(model => model.Address1)
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Address2, new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(model => model.Address2, new { @class = "form-control", placeholder = "Address Line 2" })
+                            @Html.ValidationMessageFor(model => model.Address2)
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Address3, new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(model => model.Address3, new { @class = "form-control", placeholder = "Address Line 3" })
+                            @Html.ValidationMessageFor(model => model.Address3)
+                        </div>
+                    </div>
+
+                   </div>
+
+                <div class="row">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Tel1, new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(model => model.Tel1, new { @class = "form-control", placeholder = "Telephone No 1" })
+                            @Html.ValidationMessageFor(model => model.Tel1)
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Tel2, new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(model => model.Tel2, new { @class = "form-control", placeholder = "Telephone Number 2" })
+                            @Html.ValidationMessageFor(model => model.Tel2)
+                        </div>
+                    </div>
+                    </div>
+                  
+                <div class="row">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.EMail, new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(model => model.EMail, new { @class = "form-control", placeholder = "E Mail" })
+                            @Html.ValidationMessageFor(model => model.EMail)
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Password, new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.PasswordFor(model => model.Password, new { @class = "form-control", placeholder = "Password" })
+                            @Html.ValidationMessageFor(model => model.Password)
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.ConfirmPassword, new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.PasswordFor(model => model.ConfirmPassword, new { @class = "form-control", placeholder = "Confirm Password" })
+                            @Html.ValidationMessageFor(model => model.ConfirmPassword)
+                        </div>
+                    </div>
+                    </div>
+
+                <div class="row">
+                    <div class="form-group">
+
+                        <div class="col-md-10" style="width:500px; margin-left:180px">
+                            @Html.Raw(Html.GenerateCaptcha())
+                            @Html.ValidationMessage("captcha")
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Create" class="btn btn-default" />
+                            <input type="submit" value="Cancel" class="btn btn-default" name="action:New" />
+                        </div>
+                    </div>
+                    </div>
+</fieldset>
+        </div>
+        </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

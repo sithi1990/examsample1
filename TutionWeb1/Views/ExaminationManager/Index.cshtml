@@ -1,0 +1,47 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@using TutionWeb1.Models.ViewModels.ExaminationManagerVM;
+
+@model TutionWeb1.Models.ViewModels.ExaminationManagerVM.ExaminationManagerViewModel
+
+
+@{
+    ViewBag.Title = "ExaminationManager";
+}
+
+           
+<div class="panel panel-default">
+    <div class="panel-body">             
+        <button class="btn btn-default btn-primary" style="float:right" id="ShowModel11"><span class="glyphicon glyphicon-plus"></span> New Exam</button>      
+    </div>
+</div>
+
+
+<div class="col-md-3">
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">Filter By Subjects</h3>
+        </div>
+        <div class="panel-body">
+            <div class="list-group">
+                @foreach(SubjectListViewModel sub in Model.Subjects )
+                { 
+                    <a href="@Url.Action("Index", new {subject=sub.SubjectID})" class="list-group-item">
+                        @sub.SubjectName
+                    </a>
+                }
+            </div>
+        </div>
+    </div>
+
+   
+
+</div>
+<div class="col-md-9">
+    @Html.Partial("_Index", Model.Exams)
+</div>
+
+<div id="new_model1"></div>
+
+

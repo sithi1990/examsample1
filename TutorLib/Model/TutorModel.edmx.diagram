@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="b682a84082704a09a43e3a0c0cc26a8b" Name="Diagram1">
+        <EntityTypeShape EntityType="EducLKDB2Model.Student" Width="1.5" PointX="0.75" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="EducLKDB2Model.Subject" Width="2.625" PointX="1.5" PointY="14.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="EducLKDB2Model.SubjectCategory" Width="2.375" PointX="1.5" PointY="18.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="EducLKDB2Model.Tutor" Width="1.5" PointX="1.5" PointY="20.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="EducLKDB2Model.Choice" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EducLKDB2Model.Examination" Width="1.5" PointX="0.75" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="EducLKDB2Model.Question" Width="1.5" PointX="3.75" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="EducLKDB2Model.QuestionStatu" Width="1.5" PointX="3.75" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EducLKDB2Model.StudentExam" Width="1.5" PointX="3" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="EducLKDB2Model.StudentQuestion" Width="1.5" PointX="6" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="EducLKDB2Model.StudentQuestionChoice" Width="1.5" PointX="8.25" PointY="5" IsExpanded="true" />
+        <AssociationConnector Association="EducLKDB2Model.FK_StudentExam_Student" ManuallyRouted="false" />
+        <AssociationConnector Association="EducLKDB2Model.FK_StudentQuestion_Student" ManuallyRouted="false" />
+        <AssociationConnector Association="EducLKDB2Model.FK_Examination_Subject" ManuallyRouted="false" />
+        <AssociationConnector Association="EducLKDB2Model.FK_Subject_SubjectCategory" ManuallyRouted="false" />
+        <AssociationConnector Association="EducLKDB2Model.FK_Examination_Tutor" ManuallyRouted="false" />
+        <AssociationConnector Association="EducLKDB2Model.FK_Choice_Question" ManuallyRouted="false" />
+        <AssociationConnector Association="EducLKDB2Model.FK_StudentQuestionChoice_Choice" ManuallyRouted="false" />
+        <AssociationConnector Association="EducLKDB2Model.FK_Question_Examination" ManuallyRouted="false" />
+        <AssociationConnector Association="EducLKDB2Model.FK_StudentExam_Examination" ManuallyRouted="false" />
+        <AssociationConnector Association="EducLKDB2Model.FK_StudentQuestion_Question" ManuallyRouted="false" />
+        <AssociationConnector Association="EducLKDB2Model.FK_StudentQuestion_QuestionStatus" ManuallyRouted="false" />
+        <AssociationConnector Association="EducLKDB2Model.FK_StudentQuestionChoice_StudentQuestion" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
